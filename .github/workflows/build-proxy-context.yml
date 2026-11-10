@@ -1,0 +1,78 @@
+name: Build proxy-context release
+
+# Hosted build for the quota proxy-context patch (per-key/per-provider proxy for
+# quota reads). Mirrors the memory recipe documented in the upstream build.yml:
+# 10G swapfile + webpack + 10240 MB build heap, because the hosted runner cannot
+# fit the Turbopack build.
+#
+# Produces: omniroute-dist.tar.zst (dist/ + .build/) and its sha256.
+
+on:
+  push:
+    branches: [release/proxy-context]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Production build (webpack, 10G swap)
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Expand virtual memory (10G swap)
+        run: |
+          sudo swapoff -a || true
+          sudo rm -f /mnt/swapfile /swapfile
+          sudo fallocate -l 10G /mnt/swapfile || sudo dd if=/dev/zero of=/mnt/swapfile bs=1M count=10240
+          sudo chmod 600 /mnt/swapfile
+          sudo mkswap /mnt/swapfile
+          sudo swapon /mnt/swapfile
+          free -h
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Verify proxy-context patch is present
+        run: |
+          git log --oneline -2
+          grep -n "options.apiKeyId" src/lib/usage/providerLimits.ts
+          grep -n "apiKeyId" open-sse/services/connectionProxyFetch.ts | head -5
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          ONNXRUNTIME_NODE_INSTALL: "skip"
+
+      - name: Build release (webpack)
+        run: npm run build:release
+        env:
+          OMNIROUTE_BUILD_SHA: ad6f33f
+          OMNIROUTE_BUILD_MEMORY_MB: "10240"
+          OMNIROUTE_USE_TURBOPACK: "0"
+          NODE_OPTIONS: --max-old-space-size=10240
+
+      - name: Archive dist
+        run: |
+          cat dist/BUILD_SHA || true
+          tar --zstd -cf omniroute-dist.tar.zst dist
+          sha256sum omniroute-dist.tar.zst | tee omniroute-dist.sha256
+          du -h omniroute-dist.tar.zst
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: omniroute-dist
+          path: |
+            omniroute-dist.tar.zst
+            omniroute-dist.sha256
+          retention-days: 7
