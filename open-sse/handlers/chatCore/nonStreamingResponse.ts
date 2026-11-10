@@ -668,6 +668,8 @@ export async function runNonStreamingResponse(deps: NonStreamingDeps) {
       provider,
       connectionId: successConnectionId,
       providerSpecificData: credentials?.providerSpecificData,
+      apiKeyId: apiKeyInfo?.id,
+      providerId: provider,
       log,
     });
     const usage = toolLoopUsage ?? extractUsageFromResponse(responseBody, provider);

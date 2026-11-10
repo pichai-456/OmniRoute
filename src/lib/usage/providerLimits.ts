@@ -746,16 +746,24 @@ export async function getSanitizedCachedProviderLimitsMap(): Promise<
   return sanitized;
 }
 
-export async function fetchLiveProviderLimits(connectionId: string): Promise<{
+export async function fetchLiveProviderLimits(
+  connectionId: string,
+  context: { apiKeyId?: string; providerId?: string } = {}
+): Promise<{
   connection: ProviderConnectionLike;
   usage: JsonRecord;
 }> {
-  return fetchLiveProviderLimitsWithOptions(connectionId, { forceRefresh: false });
+  return fetchLiveProviderLimitsWithOptions(connectionId, { forceRefresh: false, ...context });
 }
 
 async function fetchLiveProviderLimitsWithOptions(
   connectionId: string,
-  options: { forceRefresh?: boolean; allowRotatingRefresh?: boolean } = {}
+  options: {
+    forceRefresh?: boolean;
+    allowRotatingRefresh?: boolean;
+    apiKeyId?: string;
+    providerId?: string;
+  } = {}
 ): Promise<{
   connection: ProviderConnectionLike;
   usage: JsonRecord;
@@ -775,7 +783,11 @@ async function fetchLiveProviderLimitsWithOptions(
     // L3: route the API-key usage/quota fetch through the connection's proxy context,
     // mirroring the OAuth branch below (proxyInfo?.proxy ?? null). Without this, API-key
     // usage egresses on the host IP, ignoring the connection's assigned proxy.
-    const apiKeyProxy = await resolveProxyForConnection(connectionId);
+    const apiKeyProxy = await resolveProxyForConnection(
+      connectionId,
+      options.apiKeyId,
+      options.providerId
+    );
     const usage = sanitizeUsageQuotasForProvider(
       connection.provider,
       (await runWithProxyContext(apiKeyProxy?.proxy ?? null, () =>
@@ -799,7 +811,11 @@ async function fetchLiveProviderLimitsWithOptions(
     return { connection, usage };
   }
 
-  const proxyInfo = await resolveProxyForConnection(connectionId);
+  const proxyInfo = await resolveProxyForConnection(
+    connectionId,
+    options.apiKeyId,
+    options.providerId
+  );
 
   const fetchUsageWithContext = async (proxyConfig: unknown) =>
     runWithProxyContext(proxyConfig, async () => {

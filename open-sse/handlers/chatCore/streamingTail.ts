@@ -385,6 +385,8 @@ export async function runStreamingTail(deps: StreamingTailDeps) {
         provider,
         connectionId: streamConnectionId,
         providerSpecificData: credentials?.providerSpecificData,
+        apiKeyId: apiKeyInfo?.id,
+        providerId: provider,
         log,
       });
     }

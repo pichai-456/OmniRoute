@@ -58,11 +58,15 @@ export async function maybeSyncClaudeExtraUsageState({
   provider,
   connectionId,
   providerSpecificData,
+  apiKeyId,
+  providerId,
   log,
 }: {
   provider: string | null | undefined;
   connectionId: string | null | undefined;
   providerSpecificData: unknown;
+  apiKeyId?: string | null;
+  providerId?: string | null;
   log?: { debug?: (...args: unknown[]) => void; warn?: (...args: unknown[]) => void } | null;
 }) {
   if (!connectionId || !isClaudeExtraUsageBlockEnabled(provider, providerSpecificData)) {
@@ -70,7 +74,10 @@ export async function maybeSyncClaudeExtraUsageState({
   }
 
   try {
-    await fetchLiveProviderLimits(connectionId);
+    await fetchLiveProviderLimits(connectionId, {
+      apiKeyId: apiKeyId ?? undefined,
+      providerId: providerId ?? provider ?? undefined,
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     log?.debug?.("CLAUDE_USAGE", `Failed to sync Claude extra-usage state: ${message}`);

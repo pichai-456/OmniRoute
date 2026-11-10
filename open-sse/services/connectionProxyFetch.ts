@@ -17,22 +17,35 @@
 
 type ProxyValue = unknown;
 
+type ProxyResolutionContext = {
+  /** Gateway key (api_keys.id) when the read belongs to a key-scoped request. */
+  apiKeyId?: string;
+  /** Provider id override; the resolver derives it from the connection otherwise. */
+  providerId?: string;
+};
+
 export interface ProxyResolver {
-  resolveProxyForConnection: (connectionId: string) => Promise<{ proxy?: ProxyValue } | null>;
+  resolveProxyForConnection: (
+    connectionId: string,
+    apiKeyId?: string,
+    providerId?: string
+  ) => Promise<{ proxy?: ProxyValue } | null>;
 }
 
-interface ConnectionProxyFetchDeps {
+interface ConnectionProxyFetchDeps extends ProxyResolutionContext {
   resolveProxyForConnection?: ProxyResolver["resolveProxyForConnection"];
   fetchFn?: typeof globalThis.fetch;
 }
 
 async function defaultResolveProxyForConnection(
-  connectionId: string
+  connectionId: string,
+  apiKeyId?: string,
+  providerId?: string
 ): Promise<{ proxy?: ProxyValue } | null> {
   const override = connectionProxyTestOverride.resolveProxyForConnection;
-  if (override) return override(connectionId);
+  if (override) return override(connectionId, apiKeyId, providerId);
   const { resolveProxyForConnection } = await import("@/lib/db/settings");
-  return resolveProxyForConnection(connectionId);
+  return resolveProxyForConnection(connectionId, apiKeyId, providerId);
 }
 
 /**
@@ -41,7 +54,12 @@ async function defaultResolveProxyForConnection(
  */
 export const connectionProxyTestOverride: {
   resolveProxyForConnection:
-    ((connectionId: string) => Promise<{ proxy?: ProxyValue } | null>) | null;
+    | ((
+        connectionId: string,
+        apiKeyId?: string,
+        providerId?: string
+      ) => Promise<{ proxy?: ProxyValue } | null>)
+    | null;
 } = { resolveProxyForConnection: null };
 
 /**
@@ -53,7 +71,7 @@ export async function resolveConnectionProxy(
   deps: ConnectionProxyFetchDeps = {}
 ): Promise<ProxyValue | null> {
   const resolve = deps.resolveProxyForConnection ?? defaultResolveProxyForConnection;
-  const resolved = await resolve(connectionId);
+  const resolved = await resolve(connectionId, deps.apiKeyId, deps.providerId);
   return resolved?.proxy ?? null;
 }
 
