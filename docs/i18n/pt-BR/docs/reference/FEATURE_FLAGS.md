@@ -44,7 +44,7 @@ Uma flag booleana é considerada **habilitada** quando seu valor efetivo é `"tr
 
 ## Catálogo de Bandeiras
 
-120 bandeiras em 6 categorias.** Padrão** é a definição padrão — o valor usado quando não há substituição de DB nem variável de ambiente.
+121 bandeiras em 6 categorias.** Padrão** é a definição padrão — o valor usado quando não há substituição de DB nem variável de ambiente.
 
 ### Segurança (11)
 
@@ -59,7 +59,7 @@ Uma flag booleana é considerada **habilitada** quando seu valor efetivo é `"tr
 | `OUTBOUND_SSRF_GUARD_ENABLED`           | booleano   | `true`   | Alias legado: um valor salvo na alternância do painel desta flag é lido antes do ambiente; `false`, `0`, `no` ou `off` desativa o host do guarda URL de saída como `OMNIROUTE_ALLOW_PRIVATE_PROVIDER_URLS`.                                                                                                                     |
 | `ALLOW_API_KEY_REVEAL`                  | booleano   | `false`  | Permitir que usuários autenticados do painel revelem chaves API armazenadas em vez de ver apenas valores mascarados.                                                                                                                                                                                                            |
 | `AUTH_LOG_INCLUDE_ACCOUNT_ID`           | booleano   | `false`  | Inclui o prefixo da conta nas linhas de log AUTH (por exemplo, "Usando conta <provider> : abc12345..."). Desativado por padrão para que os identificadores de conta sejam editados dos logs do processo shared/multi-tenant. Independente do modo de depuração; inverter o modo de depuração não revela isso.                   |
-| `OMNIROUTE_OIDC_DISABLE_PASSWORD_LOGIN` | booleano   | `false`  | Quando OIDC estiver ativado, desative o login com senha para que os usuários possam autenticar somente por meio do logon único OIDC. Quando desabilitado (padrão), tanto o login por senha quanto OIDC estão disponíveis.                                                                                                       |
+| `OMNIROUTE_OIDC_DISABLE_PASSWORD_LOGIN` | booleano   | `false`  | Quando OIDC estiver ativado, desative o login com senha para que os usuários possam autenticar apenas por meio do logon único OIDC. Quando desabilitado (padrão), tanto o login por senha quanto OIDC estão disponíveis.                                                                                                        |
 | `API_KEY_AUDIT_CLIENT_DETAILS_ENABLED`  | booleano   | `false`  | Registre o endereço IP e o agente do usuário do chamador nas linhas do log de auditoria `api_key.auth.touch` escritas para leituras de descoberta e metadados de chave de API bem-sucedidas (#17982). Desativado por padrão: essas linhas ainda registram qual chave foi usada, quando e em qual caminho, sem IP ou user-agent. |
 
 ### Rede (32)
@@ -115,7 +115,7 @@ Uma flag booleana é considerada **habilitada** quando seu valor efetivo é `"tr
 
 Quando `UNPRICED_USAGE_BUDGET_POLICY` é configurado explicitamente ( substituição DB antes do ambiente), ele tem precedência sobre `USAGE_LIMIT_IGNORE_UNPRICED`. Sem valor enum explícito, a opção de exclusão booleana upstream seleciona `count_as_zero`; caso contrário, o padrão é `fail_closed`. Valores de enumeração inválidos e armazenamento de sinalizador de recurso ilegível falham no fechamento. Nenhuma das opções de exclusão relaxa os gastos com preços ou uma falha na pesquisa de preços. A aplicação e o relatório do administrador resolvem a mesma política efetiva.
 
-### Tempo de execução (57)
+### Tempo de execução (58)
 
 | Chave                                          | Tipo       | Padrão  | Reiniciar | Descrição                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ---------------------------------------------- | ---------- | ------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -178,6 +178,7 @@ Quando `UNPRICED_USAGE_BUDGET_POLICY` é configurado explicitamente ( substitui�
 | `CURSOR_GROK_47_DROP_MAX_EFFORT`               | booleano   | `false` |           | Pare de oferecer e encaminhar o esforço de raciocínio `max` para Cursor Grok 4.7 (#17386): os documentos de Cursor listam apenas low/medium/high/xhigh, para que o alias de fallback `grok-4.7-max` desapareça do catálogo e uma solicitação de esforço `max` seja enviada sem um parâmetro de esforço. Desativado por padrão: `max` permanece oferecido e encaminhado, pois uma sonda AgentService/Run ao vivo o aceitou.                                                                                                                                                                                                                                                                                                                               |
 | `RESPONSES_TRANSPORT_KEEPALIVE_ENABLED`        | booleano   | `false` |           | Envie manutenções de atividade de respostas como uma linha em branco em vez de um evento response.in_progress, para que um instantâneo sintético nunca possa substituir a resposta real no SDK oficial. Uma linha em branco não despacha nenhum evento SSE, portanto, um watchdog do cliente que reinicializa apenas em eventos não seria reinicializado durante uma longa fase silenciosa. Desativado por padrão: os temporizadores enviam o evento response.in_progress com especificação válida.                                                                                                                                                                                                                                                      |
 | `COMPRESSION_CACHE_AUTOMATIC_PREFIX_ESTIMATE`  | booleano   | `false` |           | Nas estatísticas de cache de compactação, conte uma solicitação compactada para um provedor de cache de prefixo automático (OpenAI, Codex, Azure ou uma conexão personalizada que declara cache de prompt com remoção de marcador) como um acerto de cache estimado mesmo sem marcadores `cache_control` (#17114). A estimativa é um sinal de elegibilidade do cache, não um acerto observado, portanto, a taxa de acerto relatada para esses provedores tende a 100%. Desativado por padrão: apenas uma solicitação que transporta marcadores `cache_control` para um provedor de cache conta como um acerto estimado, portanto, os provedores de prefixo automático continuam reportando 0.                                                            |
+| `CODEX_SEARCH_AUTO_FALLBACK_ENABLED`           | booleano   | `false` |           | Deixe uma pesquisa automática na web (sem `provider` explícita) usar uma conta Codex (ChatGPT) conectada por meio `codex-search`: como último recurso antes dos provedores sem chave quando nenhum provedor de pesquisa credenciado for utilizável e como alternativa de failover (#17933). Cada uma dessas pesquisas gasta a cota de assinatura ChatGPT e leva cerca de 10 a 40 segundos. Desativado por padrão: `codex-search` é executado somente quando uma solicitação o nomeia explicitamente.                                                                                                                                                                                                                                                     |
 
 ### CLI (5)
 
@@ -248,10 +249,10 @@ Retorna cada sinalizador com seu valor efetivo, origem e um resumo.
       "requiresRestart": false,
       "warningLevel": "caution",
     },
-    // ... all 119 flags
+    // ... all 121 flags
   ],
   "summary": {
-    "total": 119,
+    "total": 121,
     "active": 0,
     "inactive": 0,
     "overriddenByDb": 0,

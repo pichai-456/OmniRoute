@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Kojelaudan komponentti API: sovittimet `packages/ui-kit` — yli, katso `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: näyttöjen käyttämät kuvakkeiden nimet → Lucide - komponentit (`<Icon>`)                        |
-| `constants/providers.ts`         | **381 palveluntarjoajaa** Zod -validaatiolla (totuuden lähde)                                              |
+| `constants/providers.ts`         | **387 palveluntarjoajaa** Zod -validaatiolla (totuuden lähde)                                              |
 | `constants/cliTools.ts`          | Ulkoinen CLI -työkalurekisteri                                                                             |
 | `constants/routingStrategies.ts` | **20 reititysstrategiaa** prioriteettien kanssa                                                            |
 | `constants/publicApiRoutes.ts`   | Reitit, jotka vaativat siirtotietodennuksen (vs. hallinta).                                                |
@@ -395,24 +395,24 @@ open-sse/
 
 ### Huipputason oppaat
 
-| Doc                         | Tarkoitus                                                                                          |
-| --------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ARCHITECTURE.md`           | Korkeatasoinen arkkitehtuuri, alijärjestelmäkartta, kojelaudan pinta                               |
-| `CODEBASE_DOCUMENTATION.md` | Tekniset tiedot: hakemistot, moduulit, sopimukset                                                  |
-| `FEATURES.md`               | Ominaisuusmatriisi v3.8:n kohokohdista                                                             |
-| `USER_GUIDE.md`             | Loppukäyttäjän opas (asennus, mallit, yhdistelmät, CLIs, ääni jne.)                                |
-| `API_REFERENCE.md`          | API päätepisteviittaus todennusmallilla                                                            |
-| `openapi.yaml`              | OpenAPI 3.0 -spesifikaatio (121 polkua)                                                            |
-| `SETUP_GUIDE.md`            | Asennustavat (npm, npx, Docker, Electron, Termux, lähde)                                           |
-| `ENVIRONMENT.md`            | Kaikki env vars (~ 800 dokumentoitu, ~ 3 050 riviä `.env.example`)                                 |
-| `TROUBLESHOOTING.md`        | Yleisiä virheitä + v3.8.0 tunnetut ongelmat                                                        |
-| `RELEASE_CHECKLIST.md`      | Täysi julkaisukulku (taidot, husky, perinteiset sitoumukset, käyttöönotto)                         |
-| `COVERAGE_PLAN.md`          | Peittotavoitteet ja nykytila                                                                       |
-| `FREE_TIERS.md`             | Kuroidut vapaan tason palveluntarjoajat (48 + ilmainen + 11 OAuth)                                 |
-| `CLI-TOOLS.md`              | Ulkoiset CLI -integraatiot + Sisäiset OmniRoute CLI                                                |
-| `I18N.md`                   | i18n-arkkitehtuuri, kielen lisääminen, 67 aluetta                                                  |
-| `UNINSTALL.md`              | Puhdista asennuksen poistovaiheet                                                                  |
-| `PROVIDER_REFERENCE.md`     | **Luotu automaattisesti** 381 palveluntarjoajan luettelo (regen: `npm run gen:provider-reference`) |
+| Doc                         | Tarkoitus                                                                                    |
+| --------------------------- | -------------------------------------------------------------------------------------------- |
+| `ARCHITECTURE.md`           | Korkeatasoinen arkkitehtuuri, alijärjestelmäkartta, kojelaudan pinta                         |
+| `CODEBASE_DOCUMENTATION.md` | Tekniset tiedot: hakemistot, moduulit, sopimukset                                            |
+| `FEATURES.md`               | Ominaisuusmatriisi v3.8:n kohokohdista                                                       |
+| `USER_GUIDE.md`             | Loppukäyttäjän opas (asennus, mallit, yhdistelmät, CLIs, ääni jne.)                          |
+| `API_REFERENCE.md`          | API päätepisteviittaus todennusmallilla                                                      |
+| `openapi.yaml`              | OpenAPI 3.0 -spesifikaatio (121 polkua)                                                      |
+| `SETUP_GUIDE.md`            | Asennustavat (npm, npx, Docker, Electron, Termux, lähde)                                     |
+| `ENVIRONMENT.md`            | Kaikki env vars (~ 800 dokumentoitu, ~ 3 050 riviä `.env.example`)                           |
+| `TROUBLESHOOTING.md`        | Yleisiä virheitä + v3.8.0 tunnetut ongelmat                                                  |
+| `RELEASE_CHECKLIST.md`      | Täysi julkaisukulku (taidot, husky, perinteiset sitoumukset, käyttöönotto)                   |
+| `COVERAGE_PLAN.md`          | Peittotavoitteet ja nykytila                                                                 |
+| `FREE_TIERS.md`             | Kuroidut vapaan tason palveluntarjoajat (48 + ilmainen + 11 OAuth)                           |
+| `CLI-TOOLS.md`              | Ulkoiset CLI -integraatiot + Sisäiset OmniRoute CLI                                          |
+| `I18N.md`                   | i18n-arkkitehtuuri, kielen lisääminen, 67 aluetta                                            |
+| `UNINSTALL.md`              | Puhdista asennuksen poistovaiheet                                                            |
+| `PROVIDER_REFERENCE.md`     | **Luotu automaattisesti** catalog of 387 providers (regen: `npm run gen:provider-reference`) |
 
 ### Alajärjestelmän syväsukellukset
 

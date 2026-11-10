@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `components/`                    | Bangaren dashboard API: adaftar akan `packages/ui-kit` — duba `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: icon sunayen da allon ke amfani da → Lucide components (`<Icon>`)                      |
-| `constants/providers.ts`         | **381 masu bayarwa** tare da ingancin Zod (tushen gaskiya)                                         |
+| `constants/providers.ts`         | **387 masu bayarwa** tare da ingancin Zod (tushen gaskiya)                                         |
 | `constants/cliTools.ts`          | Wurin yin rajistar kayan aikin CLI na waje                                                         |
 | `constants/routingStrategies.ts` | **20 dabaru dabaru** tare da fifiko                                                                |
 | `constants/publicApiRoutes.ts`   | Hanyoyin da ke buƙatar mai ba da izini ( vs management) auth                                       |
@@ -395,24 +395,24 @@ open-sse/
 
 ### Jagoran manyan matakai
 
-| Doc                         | Manufar                                                                                           |
-| --------------------------- | ------------------------------------------------------------------------------------------------- |
-| `ARCHITECTURE.md`           | Babban matakin gine-gine, taswirar tsarin ƙasa, saman allo                                        |
-| `CODEBASE_DOCUMENTATION.md` | Maganar injiniya: kundayen adireshi, kayayyaki, tarurruka                                         |
-| `FEATURES.md`               | Matrix fasali tare da karin bayanai v3.8                                                          |
-| `USER_GUIDE.md`             | Littafin mai amfani na ƙarshe (saitin, samfuri, combos, CLIs, audio, da sauransu)                 |
-| `API_REFERENCE.md`          | Bayanin ƙarshen API tare da ƙirar ƙira                                                            |
-| `openapi.yaml`              | OpenAPI 3.0 spec (hanyoyi 121)                                                                    |
-| `SETUP_GUIDE.md`            | Sanya hanyoyin (npm, npx, Docker, Electron, Termux, tushe)                                        |
-| `ENVIRONMENT.md`            | Duk env vars (~ 800 rubuce, ~ 3,050 layi `.env.example`)                                          |
-| `TROUBLESHOOTING.md`        | Kurakurai gama gari + v3.8.0 sanannun batutuwa                                                    |
-| `RELEASE_CHECKLIST.md`      | Cikakkun fitarwa (basira, husky, al'adar al'ada, turawa)                                          |
-| `COVERAGE_PLAN.md`          | Maƙasudin ɗaukar hoto da halin yanzu                                                              |
-| `FREE_TIERS.md`             | Masu samar da matakin kyauta (48 + kyauta + 11 OAuth)                                             |
-| `CLI-TOOLS.md`              | Haɗin CLI na waje + ciki OmniRoute CLI                                                            |
-| `I18N.md`                   | i18n gine-gine, ƙara harshe, yankuna 67                                                           |
-| `UNINSTALL.md`              | Tsaftace matakan cirewa                                                                           |
-| `PROVIDER_REFERENCE.md`     | **An ƙirƙira ta atomatik** Katalogi na masu samarwa 381 (regen: `npm run gen:provider-reference`) |
+| Doc                         | Manufar                                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------- |
+| `ARCHITECTURE.md`           | Babban matakin gine-gine, taswirar tsarin ƙasa, saman allo                                  |
+| `CODEBASE_DOCUMENTATION.md` | Maganar injiniya: kundayen adireshi, kayayyaki, tarurruka                                   |
+| `FEATURES.md`               | Matrix fasali tare da karin bayanai v3.8                                                    |
+| `USER_GUIDE.md`             | Littafin mai amfani na ƙarshe (saitin, samfuri, combos, CLIs, audio, da sauransu)           |
+| `API_REFERENCE.md`          | Bayanin ƙarshen API tare da ƙirar ƙira                                                      |
+| `openapi.yaml`              | OpenAPI 3.0 spec (hanyoyi 121)                                                              |
+| `SETUP_GUIDE.md`            | Sanya hanyoyin (npm, npx, Docker, Electron, Termux, tushe)                                  |
+| `ENVIRONMENT.md`            | Duk env vars (~ 800 rubuce, ~ 3,050 layi `.env.example`)                                    |
+| `TROUBLESHOOTING.md`        | Kurakurai gama gari + v3.8.0 sanannun batutuwa                                              |
+| `RELEASE_CHECKLIST.md`      | Cikakkun fitarwa (basira, husky, al'adar al'ada, turawa)                                    |
+| `COVERAGE_PLAN.md`          | Maƙasudin ɗaukar hoto da halin yanzu                                                        |
+| `FREE_TIERS.md`             | Masu samar da matakin kyauta (48 + kyauta + 11 OAuth)                                       |
+| `CLI-TOOLS.md`              | Haɗin CLI na waje + ciki OmniRoute CLI                                                      |
+| `I18N.md`                   | i18n gine-gine, ƙara harshe, yankuna 67                                                     |
+| `UNINSTALL.md`              | Tsaftace matakan cirewa                                                                     |
+| `PROVIDER_REFERENCE.md`     | **An ƙirƙira ta atomatik** kundin adireshi na 387 (regen: `npm run gen:provider-reference`) |
 
 ### Subsystem zurfin-nutse
 

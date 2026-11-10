@@ -486,13 +486,13 @@ Se käsittelee seuraavat:
 
 `open-sse/config/` sisältää määrityskerroksen:
 
-| Tiedosto                      | Tarkoitus                                             |
-| ----------------------------- | ----------------------------------------------------- |
-| `providerRegistry.ts`         | Chat-mallirekisteri 381-palveluntarjoajan luettelossa |
-| `providerModels.ts`           | Mallialiakset, muotojen kartoitus                     |
-| `constants.ts`                | Aikakatkaisut, rajat, tilakoodit                      |
-| `defaultThinkingSignature.ts` | Oletusarvoinen Claude ajatteleva allekirjoitus        |
-| `modelStrip.ts` (palveluissa) | Palveluntarjoajakohtainen kentän kuorinta             |
+| Tiedosto                      | Tarkoitus                                                  |
+| ----------------------------- | ---------------------------------------------------------- |
+| `providerRegistry.ts`         | Chat-mallirekisteri 387-palveluntarjoajan luettelon kautta |
+| `providerModels.ts`           | Mallialiakset, muotojen kartoitus                          |
+| `constants.ts`                | Aikakatkaisut, rajat, tilakoodit                           |
+| `defaultThinkingSignature.ts` | Oletusarvoinen Claude ajatteleva allekirjoitus             |
+| `modelStrip.ts` (palveluissa) | Palveluntarjoajakohtainen kentän kuorinta                  |
 
 ### Palveluntarjoajan rekisterikaavio
 

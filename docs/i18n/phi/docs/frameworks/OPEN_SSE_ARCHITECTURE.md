@@ -486,13 +486,13 @@ Pinangangasiwaan nito ang:
 
 hawak `open-sse/config/` ang layer ng pagsasaayos:
 
-| file                              | Layunin                                               |
-| --------------------------------- | ----------------------------------------------------- |
-| `providerRegistry.ts`             | Registry ng modelo ng chat sa catalog ng 381 provider |
-| `providerModels.ts`               | Mga alias ng modelo, pagmamapa ng format              |
-| `constants.ts`                    | Mga timeout, limitasyon, status code                  |
-| `defaultThinkingSignature.ts`     | Default Claude thinking signature                     |
-| `modelStrip.ts` (sa mga serbisyo) | Pagtanggal ng field ng bawat provider                 |
+| file                              | Layunin                                         |
+| --------------------------------- | ----------------------------------------------- |
+| `providerRegistry.ts`             | Chat-model registry sa katalogo ng 387 provider |
+| `providerModels.ts`               | Mga alias ng modelo, pagmamapa ng format        |
+| `constants.ts`                    | Mga timeout, limitasyon, status code            |
+| `defaultThinkingSignature.ts`     | Default Claude thinking signature               |
+| `modelStrip.ts` (sa mga serbisyo) | Pagtanggal ng field ng bawat provider           |
 
 ### Schema ng Registry ng Provider
 
